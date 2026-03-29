@@ -1,17 +1,8 @@
-import React, { useState } from 'react'
 import { IoSearch } from "react-icons/io5";
 
-export default function Search() {
+export default function Search({ searchState }) {
 
-    let [search, setSearch] = useState("");
-
-    //! Update the state of the search
-    function handleSearch(event) {
-        let { value } = event.target;
-        setSearch(value)
-    }
-
-    console.log("Searching for... ", search)
+    let { search, setSearch } = searchState;
 
     return (
         <div className='w-1/3 flex justify-end'>
@@ -22,7 +13,7 @@ export default function Search() {
                     id="search"
                     placeholder='Search'
                     value={search}
-                    onChange={handleSearch}
+                    onChange={(event) => setSearch(event.target.value)}
                     className='w-90 h-12 rounded-full px-4 bg-gray-200 pl-9 font-roboto tracking-wider focus:outline-0 focus:bg-gray-300'
                 />
                 <IoSearch className='absolute top-1/3 left-2' />
