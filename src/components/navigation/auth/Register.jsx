@@ -1,6 +1,10 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile } from 'firebase/auth';
+import { _Auth } from './../../../firebase/FirebaseBaas';
+
+import toast from 'react-hot-toast';
 
 export default function Register() {
 
@@ -41,6 +45,32 @@ export default function Register() {
         })
     }
 
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        let { username, email, password, confirmPassword } = data;
+
+        try {
+            if (password === confirmPassword) {
+                let userCredential = await createUserWithEmailAndPassword(_Auth, email, password);
+
+                await sendEmailVerification(userCredential.user);
+                toast.success("Verification email sent successfully!!");
+                redirect("/login");
+
+                updateProfile(userCredential.user, {
+                    displayName: username
+                });
+
+            } else {
+                toast.error("Password Mismatched");
+            }
+        } catch (error) {
+            toast.error(error.message)
+            console.log(error);
+
+        }
+    }
 
 
     return (
@@ -48,7 +78,7 @@ export default function Register() {
             <h1 className='text-3xl font-bold text-gray-400 uppercase tracking-wider '>Register Form</h1>
             <form
                 className="w-95 bg-gray-300 p-10 rounded-md flex flex-col justify-center items-center"
-                onSubmit={() => { }}
+                onSubmit={handleSubmit}
             >
 
                 <div className='m-3'>

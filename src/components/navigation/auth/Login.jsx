@@ -1,5 +1,9 @@
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
+import { _Auth } from "../../../firebase/FirebaseBaas";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
@@ -7,7 +11,7 @@ export default function Login() {
         email: "",
         password: ""
     })
-
+    let redirect = useNavigate();
     let [passwordType, setPasswordType] = useState(false);
 
     function handleInput(event) {
@@ -18,12 +22,37 @@ export default function Login() {
         })
     }
 
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+        try {
+            let { email, password } = data;
+            let userCredential = await signInWithEmailAndPassword(_Auth, email, password);
+            let { emailVerified } = userCredential.user;
+
+            if (emailVerified) {
+                toast.success("Login Successfull!!");
+                redirect("/");
+            } else {
+                toast.error("Email not verified yet!")
+            }
+        } catch (error) {
+            toast.error(error.message);
+            setData({
+                ...data,
+                email: "",
+                password: ""
+            });
+        }
+    }
+
+
     return (
         <main className='w-full h-[calc(100dvh-200px)]  flex flex-col justify-center items-center gap-8'>
             <h1 className='text-3xl font-bold text-gray-400 uppercase tracking-wider '>Login Form</h1>
             <form
                 className="w-95 bg-gray-300 p-10 rounded-md flex flex-col justify-center items-center"
-                onSubmit={() => { }}
+                onSubmit={handleSubmit}
             >
 
                 <div className='m-3'>
