@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 
 export default function ProductDetail() {
 
-    let [clickedItem, setClickedItem] = useState({});
+    let [clickedItem, setClickedItem] = useState(null);
     let reqParam = useParams();
     let redirect = useNavigate();
 
@@ -21,10 +21,14 @@ export default function ProductDetail() {
         let finalProductData = await axios.get(`https://dummyjson.com/products/${reqParam.id}`);
         setClickedItem(finalProductData.data);
     }
-    useEffect(() => { fetchApi(); }, []);
+    useEffect(() => { fetchApi(); addEventListener("online", fetchApi) }, []);
 
-    console.log(clickedItem);
 
+    if (!clickedItem) {
+        return (
+            <div className='animate-spin w-5 h-10 absolute top-1/2 left-1/2 -translate-1/2 border-4 border-gray-500 rounded-full border-t-gray-700'></div>
+        );
+    }
 
     return (
         <div className="w-full flex p-10 gap-15 items-center relative ">
@@ -81,7 +85,7 @@ export default function ProductDetail() {
                 </div>
             </div>
             <button onClick={() => { redirect("/") }}>
-                <IoClose className="absolute text-5xl right-10 top-10 text-gray-500 cursor-pointer" />
+                <IoClose className="absolute text-5xl right-10 top-10 text-gray-500 cursor-pointer hover:text-black" />
             </button>
         </div>
 

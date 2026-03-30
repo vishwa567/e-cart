@@ -4,8 +4,8 @@ import Menu from '../navigation/Menu'
 export default function Header({ searchState }) {
     return (
         <>
-            <Navbar searchState={searchState} />
-            <Menu />
+            <Navbar />
+            <Menu searchState={searchState} />
         </>
     )
 }

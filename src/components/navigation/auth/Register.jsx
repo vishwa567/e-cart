@@ -74,7 +74,7 @@ export default function Register() {
 
 
     return (
-        <main className='w-full h-[calc(100dvh-100px)]  flex flex-col justify-center items-center gap-8'>
+        <main className='w-full h-[calc(100dvh-150px)]  flex flex-col justify-center items-center gap-8'>
             <h1 className='text-3xl font-bold text-gray-400 uppercase tracking-wider '>Register Form</h1>
             <form
                 className="w-95 bg-gray-300 p-10 rounded-md flex flex-col justify-center items-center"
