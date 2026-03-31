@@ -13,16 +13,20 @@ export default function Home() {
     let { limit, setLimit } = limitState;
     let { category, setCategory } = categoryState;
 
+
     //! Handling the data
     function handleFiltering() {
-        let filtered = items?.filter((prod) =>
-            prod.title.toLowerCase().includes(search.toLowerCase()) ||
-            prod.category.toLowerCase().includes(category.toLocaleLowerCase())
-        );
+        let filtered = items?.filter((prod) => {
+            return (
+                prod.title.toLowerCase().includes(search.toLowerCase()) &&
+                prod.category.toLowerCase().includes(category.toLowerCase())
+            );
+        });
+
         setVisibleItems(filtered?.slice(0, limit));
-        setCategory("");
     }
-    useEffect(() => { handleFiltering(); }, [search, limit, items]);
+
+    useEffect(() => { handleFiltering(); }, [search, limit, items, category]);
 
     return (
         <>
@@ -44,10 +48,10 @@ export default function Home() {
                             ))
                         }
                     </div>
-                    <button
+                    {category ? <div></div> : <button
                         className="bg-black text-white text-center w-50  py-2 self-center cursor-pointer"
                         onClick={() => setLimit(limit + 12)}
-                    >Load More</button>
+                    >Load More</button>}
                 </div> :
                 <div className='animate-spin w-5 h-10 absolute top-1/2 left-1/2 -translate-1/2 border-4 border-gray-500 rounded-full border-t-gray-700'></div>
             }

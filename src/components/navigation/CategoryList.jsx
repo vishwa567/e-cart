@@ -6,7 +6,8 @@ import Logo from './Logo';
 export default function CategoryList() {
 
     let [categoryList, setCategoryList] = useState([]);
-    let { setCategory } = useContext(AllItems);
+    let { categoryState } = useContext(AllItems);
+    let { setCategory } = categoryState;
 
     async function fetchCategory() {
 
@@ -25,6 +26,9 @@ export default function CategoryList() {
         <div className='absolute  h-100 w-135 z-50 bg-gray-400 top-15 -left-25  rounded-3xl '>
             {categoryList.length != 0 ?
                 <ul className='flex flex-col flex-wrap h-full py-4 px-10'>
+                    <li
+                        onClick={() => setCategory("")}
+                        className='capitalize list-disc text-gray-200 hover:text-black'>All</li>
                     {
                         categoryList?.map(list => (
                             <li
