@@ -50,7 +50,7 @@ export default function Menu({ searchState }) {
                         )}
                     </Link>
                 </div >
-                <Link className='flex gap-1 items-center' to="/" ><FaCartShopping />Cart</Link>
+                <Link className='flex gap-1 items-center' to="/cart" ><FaCartShopping />Cart</Link>
                 {
                     userData?.emailVerified ? validUser() : inValidUser()
                 }

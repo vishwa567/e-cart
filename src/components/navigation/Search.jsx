@@ -23,7 +23,7 @@ export default function Search({ searchState }) {
                     placeholder='Search'
                     value={search}
                     onChange={handleSearch}
-                    className='w-90 h-12 rounded-full px-4 bg-gray-200 pl-9 font-roboto tracking-wider focus:outline-1 focus:bg-gray-300'
+                    className='w-90 h-12 rounded-full px-4 bg-gray-200 pl-9 font-roboto tracking-wider  focus:outline-0 capitalize'
                 />
                 <IoSearch className='absolute top-1/3 left-2' />
             </form>

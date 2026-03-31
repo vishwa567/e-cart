@@ -11,14 +11,15 @@ export default function Home() {
     let { items, visibleItemsState, limitState, categoryState } = useContext(AllItems);
     let { visibleItems, setVisibleItems } = visibleItemsState;
     let { limit, setLimit } = limitState;
-    let { category, setCategory } = categoryState;
+    let { category } = categoryState;
 
 
     //! Handling the data
     function handleFiltering() {
         let filtered = items?.filter((prod) => {
             return (
-                prod.title.toLowerCase().includes(search.toLowerCase()) &&
+                (prod.title.toLowerCase().includes(search.toLowerCase()) ||
+                    prod.category.toLowerCase().includes(search.toLowerCase())) &&
                 prod.category.toLowerCase().includes(category.toLowerCase())
             );
         });
@@ -48,7 +49,7 @@ export default function Home() {
                             ))
                         }
                     </div>
-                    {category ? <div></div> : <button
+                    {(category || search) ? <div></div> : <button
                         className="bg-black text-white text-center w-50  py-2 self-center cursor-pointer"
                         onClick={() => setLimit(limit + 12)}
                     >Load More</button>}

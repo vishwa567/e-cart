@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { IoClose } from "react-icons/io5";
@@ -9,12 +9,14 @@ import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { CartData } from "../../../contexts/CartContext";
 
 export default function ProductDetail() {
 
     let [clickedItem, setClickedItem] = useState(null);
     let reqParam = useParams();
     let redirect = useNavigate();
+    let { addToCart, orgCost } = useContext(CartData);
 
 
     async function fetchApi() {
@@ -62,6 +64,7 @@ export default function ProductDetail() {
                     </div>
 
                     <div>
+                        <h3 className="text-2xl text-gray-300">$<del>{orgCost(clickedItem)}</del></h3>
                         <h1 className="text-3xl font-semibold tracking-wide">
                             ${clickedItem?.price}
                             <span className="text-sm border mx-2 px-3 rounded-md border-green-400 bg-green-200">
@@ -72,7 +75,7 @@ export default function ProductDetail() {
                     </div>
                 </div>
 
-                <button className="bg-black text-white text-center w-75  py-2  cursor-pointer">Add To Cart</button>
+                <button onClick={() => addToCart(clickedItem)} className="bg-black text-white text-center w-75  py-2  cursor-pointer">Add To Cart</button>
 
                 <div>
                     <h3 className="font-semibold">About the Product</h3>
