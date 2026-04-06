@@ -6,15 +6,16 @@ import "swiper/css/pagination";
 
 export default function Hero() {
     return (
-        <div>
+        <div >
             <Swiper
                 modules={[Pagination, Autoplay]}
                 pagination={{ clickable: true }}
                 autoplay={{ delay: 3000 }}
+                className='h-[60dvh]'
             >
-                <SwiperSlide><img src={"/slide-image-1.jpg"} className='w-full h-[50dvh] object-cover'></img></SwiperSlide>
-                <SwiperSlide><img src={"/slide-image-2.jpg"} className='w-full h-[50dvh] object-cover'></img></SwiperSlide>
-                <SwiperSlide><img src={"/slide-image-3.jpg"} className='w-full h-[50dvh] object-cover'></img></SwiperSlide>
+                <SwiperSlide><img src={"/slide-image-1.jpg"} className='w-full h-full object-cover'></img></SwiperSlide>
+                <SwiperSlide><img src={"/slide-image-2.jpg"} className='w-full h-full object-cover'></img></SwiperSlide>
+                <SwiperSlide><img src={"/slide-image-3.jpg"} className='w-full h-full object-cover'></img></SwiperSlide>
             </Swiper>
         </div>
     )

@@ -3,7 +3,7 @@ import CartCards from "./CartCards";
 import { CartData } from "../../contexts/CartContext";
 
 export default function Cart() {
-    let { cartItems, totalPrice, calcTax, calcDiscount, delivery } = useContext(CartData);
+    let { cartItems, totalPrice, calcTax, calcDiscount, delivery, handleCoupon } = useContext(CartData);
 
     return (
         <div className="p-10 w-full h-[calc(100dvh-132px)]">
@@ -29,6 +29,7 @@ export default function Cart() {
                             type="text"
                             className="h-13 rounded-2xl bg-gray-200 px-5 text-black uppercase font-light focus:outline-0 tracking-wider text-lg"
                             placeholder="Enter Coupon Code"
+                            onChange={handleCoupon}
                         />
                         <button className="border border-black text-black font-semibold text-center w-full rounded  py-3 self-center cursor-pointer " >Apply</button>
                     </div>

@@ -28,12 +28,12 @@ export default function CategoryList() {
                 <ul className='flex flex-col flex-wrap h-full py-4 px-10'>
                     <li
                         onClick={() => setCategory("")}
-                        className='capitalize list-disc text-gray-200 hover:text-black'>All</li>
+                        className='capitalize list-disc text-white hover:text-black'>All</li>
                     {
                         categoryList?.map(list => (
                             <li
                                 onClick={() => filterCategory(list)}
-                                className='capitalize list-disc text-gray-200 hover:text-black'
+                                className='capitalize list-disc text-white hover:text-black'
                                 key={list}
                             >
                                 {list.replace("-", " ")}

@@ -1,7 +1,6 @@
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { createContext, useEffect, useState } from 'react'
 import { _Auth } from '../firebase/FirebaseBaas';
-import axios from 'axios';
 
 export let AuthUserContext = createContext();
 
@@ -23,9 +22,20 @@ export default function AuthContext({ children }) {
         return () => unsubscribe();
     }, []);
 
+    function logout() {
+        signOut(_Auth)
+            .then(() => {
+                setUserData(null);
+                toast.success("Logout Successfully!!");
+            })
+            .catch((error) => {
+                toast.error(error.message || "Logout failed");
+            });
+    }
+
 
     return (
-        <AuthUserContext.Provider value={{ userData }}>
+        <AuthUserContext.Provider value={{ userData, logout }}>
             {children}
         </AuthUserContext.Provider>
     )

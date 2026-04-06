@@ -32,6 +32,7 @@ export default function Login() {
 
             if (emailVerified) {
                 toast.success("Login Successfull!!");
+                window.location.assign("/");
                 redirect("/");
             } else {
                 toast.error("Email not verified yet!")

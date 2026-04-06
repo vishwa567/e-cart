@@ -12,13 +12,14 @@ import CategoryList from './CategoryList';
 
 export default function Menu({ searchState }) {
 
-    let { userData } = useContext(AuthUserContext);
+    let { userData, logout } = useContext(AuthUserContext);
     let [showCategory, setShowCategory] = useState(false);
 
     function validUser() {
         return (
             <>
-                <Link className='flex gap-1 items-center' to="/login" ><MdLogout />Logout</Link>
+                <Link className='flex gap-1 items-center' to="/cart" ><FaCartShopping />Cart</Link>
+                <Link onClick={logout} className='flex gap-1 items-center' to="/" ><MdLogout />Logout</Link>
             </>
         )
     }
@@ -50,7 +51,6 @@ export default function Menu({ searchState }) {
                         )}
                     </Link>
                 </div >
-                <Link className='flex gap-1 items-center' to="/cart" ><FaCartShopping />Cart</Link>
                 {
                     userData?.emailVerified ? validUser() : inValidUser()
                 }

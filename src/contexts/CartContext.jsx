@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 
 export let CartData = createContext();
 
@@ -30,6 +31,7 @@ export default function CartContext({ children }) {
                 return [...prev, { ...product, quantity: 1 }]
             }
         })
+        toast.success("Added Successfully!!");
     }
 
     function decrementQty(id) {
@@ -109,7 +111,10 @@ export default function CartContext({ children }) {
     }
 
     function delivery() {
-        return 4.99;
+        return cartItems.length ? 4.99 : 0;
+    }
+
+    function handleCoupon(event) {
     }
 
     return (
@@ -117,7 +122,7 @@ export default function CartContext({ children }) {
             cartItems,
             addToCart, incrementQty, decrementQty, removeItem,
             totalPrice, calcTax, calcDiscount,
-            orgCost, delivery
+            orgCost, delivery, handleCoupon
         }}>
             {children}
         </CartData.Provider>
